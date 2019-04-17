@@ -5,7 +5,12 @@
 <url> <loc>https://ustart-dev.github.io/users</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/en/users" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/commands</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/commands" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/datasources</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/datasources" /> </url>
-<url> <loc>https://ustart-dev.github.io/docs/first-example</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/first-example" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/first-example-1</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/first-example-1" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/first-example-2</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/first-example-2" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/installation</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/installation" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/models</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/models" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/permissions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/permissions" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/project-structure</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/project-structure" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/schema-directives</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/schema-directives" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/subscriptions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/subscriptions" /> </url>
 </urlset>
