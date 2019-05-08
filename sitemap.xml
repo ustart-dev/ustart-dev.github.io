@@ -14,6 +14,8 @@
 <url> <loc>https://ustart-dev.github.io/docs/models</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/models" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/permissions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/permissions" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/project-structure</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/project-structure" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/resolvers</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/resolvers" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/schema-directives</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/schema-directives" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/schema</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/schema" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/subscriptions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/subscriptions" /> </url>
 </urlset>
