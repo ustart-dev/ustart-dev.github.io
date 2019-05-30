@@ -3,7 +3,7 @@
 <url> <loc>https://ustart-dev.github.io/help</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/en/help" /> </url>
 <url> <loc>https://ustart-dev.github.io/index</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/en/index" /> </url>
 <url> <loc>https://ustart-dev.github.io/users</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/en/users" /> </url>
-<url> <loc>https://ustart-dev.github.io/docs/build</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/build" /> </url>
+<url> <loc>https://ustart-dev.github.io/docs/build-deploy</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/build-deploy" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/commands</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/commands" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/datasources</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/datasources" /> </url>
 <url> <loc>https://ustart-dev.github.io/docs/email</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://ustart-dev.github.io/docs/email" /> </url>
