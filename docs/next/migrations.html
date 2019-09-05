@@ -131,6 +131,8 @@
 <ul>
 <li>Build your project src into dist</li>
 <li>Create a migration file with name like <code>XX-migration-name.js</code></li>
+<li>Create or update <code>_current.json</code> which is used to calculate the differences between models the next time you generate a migration.</li>
+<li>Create or update <code>_current_bak.json</code> which is used to calculate the differences between models the next time you generate a migration. This file is created in the second execution.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="create-a-migration-manually"></a><a href="#create-a-migration-manually" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a migration manually</h2>
 <p>The migrations file format is fully compatible with Sequelize. You can create your own migrations file by using the skeleton:</p>
@@ -166,13 +168,36 @@
 <p>More about it in the repo: <a href="https://github.com/ustart-dev/sequelize-auto-migrations#todo">Sequelize-auto-migrations</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
 <p>To illustrate how you should use migrations, lets use the <em>Animal</em> example shown in <a href="/docs/next/resolvers#using-resolvers">Resolvers, using resolvers</a> section. For shortening the example, the resolver is omitted.</p>
-<p>For the follow type (omiting <em>query</em> and <em>mutation</em>):</p>
+<p>Before start remember that you have to:</p>
+<ul>
+<li>Install the database drivers.</li>
+<li>Add the database URL to the <code>.env</code> file.</li>
+<li>Disable database sync and enable the migration at <code>datasources.js</code>.</li>
+</ul>
+<p>For the follow type:</p>
 <pre><code class="hljs css language-graphql"><span class="hljs-comment"># file: src/entities/Animal/animal.type.graphql</span><span class="hljs-built_in">
 type </span>Animal {
   id: Int
   name: String
   age: Int
   category: String
+}
+<span class="hljs-built_in">
+type </span>Query {
+  # Returns an animal by its ID
+  getAnimal(id: Int!): Animal
+
+  # Returns a list of animals that matches name
+  getAnimalsByName(name: String!): [Animal]
+}
+<span class="hljs-built_in">
+type </span>Mutation {
+  # Register one animal <span class="hljs-keyword">and</span> returns the record
+  addAnimal(
+    name: String,
+    age: Int,
+    category: String
+  ): Animal
 }
 </code></pre>
 <p>We can use this model:</p>
@@ -196,21 +221,112 @@ ustart.defineModel(<span class="hljs-string">"postgres"</span>, <span class="hlj
 <p>The above model is our version 1.0. Let's create the initial migration:</p>
 <pre><code class="hljs css language-shell">npx ustart migration:autogenerate --name "initial-migration"
 </code></pre>
-<p>[TODO: ADD COMMAND OUTPUT]</p>
+<p>The command output:</p>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">#</span><span class="bash"> ...build process output...</span>
+
+[Actions] createTable "animals", deps: []
+New migration to revision 1 has been saved to file 'FULL-PATH-TO-YOUR-PROJECT/animals-example/migrations/1-initial-migration.js'
+</code></pre>
+<p>Two files were created in the migrations folder:</p>
+<ul>
+<li><code>_current.json</code> <a href="/docs/next/migrations#creating-a-migration-autogenerate">explained previosly</a>.</li>
+<li><code>1-initial-migrations.js</code> is your migration, let's look inside it:</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> Sequelize = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sequelize'</span>);
+
+<span class="hljs-comment">/**
+ * Actions summary:
+ *
+ * createTable "animals", deps: []
+ *
+ **/</span>
+
+<span class="hljs-keyword">var</span> info = {
+    <span class="hljs-string">"revision"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"initial-migration"</span>,
+    <span class="hljs-string">"created"</span>: <span class="hljs-string">"2019-09-05T16:06:48.678Z"</span>,
+    <span class="hljs-string">"comment"</span>: <span class="hljs-string">""</span>
+};
+
+<span class="hljs-keyword">var</span> migrationCommands = [{
+    <span class="hljs-attr">fn</span>: <span class="hljs-string">"createTable"</span>,
+    <span class="hljs-attr">params</span>: [
+        <span class="hljs-string">"animals"</span>,
+        {
+            <span class="hljs-string">"id"</span>: {
+                <span class="hljs-string">"type"</span>: Sequelize.INTEGER,
+                <span class="hljs-string">"field"</span>: <span class="hljs-string">"id"</span>,
+                <span class="hljs-string">"autoIncrement"</span>: <span class="hljs-literal">true</span>,
+                <span class="hljs-string">"primaryKey"</span>: <span class="hljs-literal">true</span>
+            },
+            <span class="hljs-string">"name"</span>: {
+                <span class="hljs-string">"type"</span>: Sequelize.STRING(<span class="hljs-number">10</span>),
+                <span class="hljs-string">"field"</span>: <span class="hljs-string">"name"</span>
+            },
+            <span class="hljs-string">"age"</span>: {
+                <span class="hljs-string">"type"</span>: Sequelize.INTEGER,
+                <span class="hljs-string">"field"</span>: <span class="hljs-string">"age"</span>
+            },
+            <span class="hljs-string">"category"</span>: {
+                <span class="hljs-string">"type"</span>: Sequelize.STRING(<span class="hljs-number">20</span>),
+                <span class="hljs-string">"field"</span>: <span class="hljs-string">"category"</span>
+            }
+        },
+        {}
+    ]
+}];
+
+<span class="hljs-built_in">module</span>.exports = {
+    <span class="hljs-attr">pos</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">up</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">queryInterface, Sequelize</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> index = <span class="hljs-keyword">this</span>.pos;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">next</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">if</span> (index &lt; migrationCommands.length)
+                {
+                    <span class="hljs-keyword">let</span> command = migrationCommands[index];
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"[#"</span>+index+<span class="hljs-string">"] execute: "</span> + command.fn);
+                    index++;
+                    queryInterface[command.fn].apply(queryInterface, command.params).then(next, reject);
+                }
+                <span class="hljs-keyword">else</span>
+                    resolve();
+            }
+            next();
+        });
+    },
+    <span class="hljs-attr">info</span>: info
+};
+</code></pre>
 <p>Go on and run the migration (make sure the database does not have the table).</p>
 <pre><code class="hljs css language-shell">npx ustart db:migrate
 </code></pre>
-<p>[TODO: ADD COMMAND OUTPUT]</p>
-<p>Look at your database, the table <code>animals</code> with its four attributes must be there.</p>
-<p>Now, for our version 2.0 we are going to add a field: <code>size</code> of string type.</p>
+<p>The command output:</p>
+<pre><code class="hljs css language-shell">Sequelize CLI [Node: 8.9.4, CLI: 5.5.1, ORM: 5.18.1]
+
+Parsed url postgres://localhost:5432/animals-example
+File: _current.json does not match pattern: /\.js$/
+File: _current.json does not match pattern: /\.js$/
+File: _current.json does not match pattern: /\.js$/
+== 1-initial-migration: migrating =======
+<span class="hljs-meta">[#</span><span class="bash">0] execute: createTable</span>
+== 1-initial-migration: migrated (0.881s)
+</code></pre>
+<p>You can ignore the lines about <code>_current.json</code>.</p>
+<p>Look at your database, the table <code>animals</code> with its four attributes must be there along with <code>SequelizeMeta</code>.</p>
+<p><img src="/docs/assets/migrations-show-tables-version-1.png" alt="Table list for version 1"></p>
+<p>Now, for our version 2.0 we are going to add a field: <code>size</code> of type string.</p>
 <p>First, add it in the graphql type:</p>
-<pre><code class="hljs css language-graphql"><span class="hljs-comment"># file: src/entities/Animal/animal.type.graphql</span><span class="hljs-built_in">
-type </span>Animal {
-  id: Int
-  name: String
-  age: Int
-  category: String
-  size: String # new field
+<pre><code class="hljs css language-graphql"># file: src/entities/<span class="hljs-type">Animal</span>/animal.<span class="hljs-keyword">type</span>.graphql
+<span class="hljs-keyword">type</span> <span class="hljs-type">Animal</span> {
+  id: <span class="hljs-type">Int</span>
+  name: <span class="hljs-type">String</span>
+  age: <span class="hljs-type">Int</span>
+  category: <span class="hljs-type">String</span>
+  size: <span class="hljs-type">String</span> # &lt;<span class="hljs-comment">-- new field</span>
 }
 </code></pre>
 <p>Now at the model:</p>
@@ -227,7 +343,7 @@ ustart.defineModel(<span class="hljs-string">"postgres"</span>, <span class="hlj
   <span class="hljs-attr">name</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">10</span>) },
   <span class="hljs-attr">age</span>: { <span class="hljs-attr">type</span>: Sequelize.INTEGER },
   <span class="hljs-attr">category</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">20</span>) },
-  <span class="hljs-attr">size</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">20</span>) } <span class="hljs-comment">// New field!</span>
+  <span class="hljs-attr">size</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">20</span>) } <span class="hljs-comment">// &lt;-- new field!</span>
 }, {
   <span class="hljs-attr">timestamps</span>: <span class="hljs-literal">false</span>
 });
@@ -235,10 +351,89 @@ ustart.defineModel(<span class="hljs-string">"postgres"</span>, <span class="hlj
 <p>Then create the migration file:</p>
 <pre><code class="hljs css language-shell">npx ustart migration:autogenerate --name "animal-add-column-size"
 </code></pre>
-<p>[TODO: ADD COMMAND OUTPUT]</p>
-<p>Go on and run the migration.</p>
+<p>The command output:</p>
+<pre><code class="hljs css language-js"># ...build process output...
+[Actions] addColumn "size" to table "animals"
+New migration to revision 2 has been saved to file 'FULL-PATH-TO-YOUR-PROJECT/animals-example/migrations/2-animal-add-column-size.js'
+</code></pre>
+<p>Two files were created in the migrations folder:</p>
+<ul>
+<li><code>_current_back.json</code> <a href="/docs/next/migrations#creating-a-migration-autogenerate">explained previosly</a>.</li>
+<li><code>2-animal-add-column-size.js</code> is your second migration, let's look inside it:</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> Sequelize = <span class="hljs-built_in">require</span>(<span class="hljs-string">'sequelize'</span>);
+
+<span class="hljs-comment">/**
+ * Actions summary:
+ *
+ * addColumn "size" to table "animals"
+ *
+ **/</span>
+
+<span class="hljs-keyword">var</span> info = {
+    <span class="hljs-string">"revision"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"animal-add-column-size"</span>,
+    <span class="hljs-string">"created"</span>: <span class="hljs-string">"2019-09-05T17:52:52.869Z"</span>,
+    <span class="hljs-string">"comment"</span>: <span class="hljs-string">""</span>
+};
+
+<span class="hljs-keyword">var</span> migrationCommands = [{
+    <span class="hljs-attr">fn</span>: <span class="hljs-string">"addColumn"</span>,
+    <span class="hljs-attr">params</span>: [
+        <span class="hljs-string">"animals"</span>,
+        <span class="hljs-string">"size"</span>,
+        {
+            <span class="hljs-string">"type"</span>: Sequelize.STRING(<span class="hljs-number">20</span>),
+            <span class="hljs-string">"field"</span>: <span class="hljs-string">"size"</span>
+        }
+    ]
+}];
+
+<span class="hljs-built_in">module</span>.exports = {
+    <span class="hljs-attr">pos</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">up</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">queryInterface, Sequelize</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> index = <span class="hljs-keyword">this</span>.pos;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">next</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">if</span> (index &lt; migrationCommands.length)
+                {
+                    <span class="hljs-keyword">let</span> command = migrationCommands[index];
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"[#"</span>+index+<span class="hljs-string">"] execute: "</span> + command.fn);
+                    index++;
+                    queryInterface[command.fn].apply(queryInterface, command.params).then(next, reject);
+                }
+                <span class="hljs-keyword">else</span>
+                    resolve();
+            }
+            next();
+        });
+    },
+    <span class="hljs-attr">info</span>: info
+};
+
+</code></pre>
+<p>Go on and run the migration:</p>
 <pre><code class="hljs css language-shell">npx ustart db:migrate
 </code></pre>
-<p>[TODO: ADD COMMAND OUTPUT]</p>
-<p>Look at your database, if it matches the last model's version then congratulations, you have your first migrations flow done!.</p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-9-4 by Leo Peña</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/next/models"><span class="arrow-prev">← </span><span>Models</span></a><a class="docs-next button" href="/docs/next/permissions"><span>Permissions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#database-sync">Database sync</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#general-process">General process</a></li><li><a href="#the-cli">The CLI</a></li><li><a href="#structure">Structure</a></li><li><a href="#enabling-migrations">Enabling migrations</a></li><li><a href="#creating-a-migration-autogenerate">Creating a migration (autogenerate)</a></li><li><a href="#create-a-migration-manually">Create a migration manually</a></li><li><a href="#running-migrations">Running migrations</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#example">Example</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icono-ustart.svg" alt="uStart" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/installation.html">Getting Started</a><a href="/docs/schema.html">Guides</a><a href="/docs/commands.html">API Reference</a></div><div><h5>Community</h5><a href="https://twitter.com/_uStart" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://linkedin.com/company/ustart-dev" target="_blank" rel="noreferrer noopener">LinkedIn</a><a href="https://www.facebook.com/ustart.dev/" target="_blank" rel="noreferrer noopener">Facebook</a></div><div><h5>More</h5><a href="https://github.com/ustart-dev">GitHub</a><a class="github-button" href="https://github.com/ustart-dev/ustart" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 USTART SPA</section></footer></div></body></html>
+<p>The command output:</p>
+<pre><code class="hljs css language-js">Sequelize CLI [Node: 8.9.4, CLI: 5.5.1, ORM: 5.18.1]
+
+Parsed url postgres://localhost:5432/animals-example
+File: _current.json does not match pattern: /\.js$/
+File: _current_bak.json does not match pattern: /\.js$/
+File: _current.json does not match pattern: /\.js$/
+File: _current_bak.json does not match pattern: /\.js$/
+File: _current.json does not match pattern: /\.js$/
+File: _current_bak.json does not match pattern: /\.js$/
+== 2-animal-add-column-size: migrating =======
+[#0] execute: addColumn
+== 2-animal-add-column-size: migrated (0.178s)
+</code></pre>
+<p>You can ignore the lines about <code>_current.json</code> and <code>_current_bak.json</code>.</p>
+<p>The follow image shows both migrations record and the new <code>size</code> column of table <code>animals</code>:</p>
+<p><img src="/docs/assets/migrations-show-tables-version-2.png" alt="Table list for version 2"></p>
+<p>If your database matches the image, congratulations then, you have done your first migrations flow!.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-9-5 by Leo Peña</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/next/models"><span class="arrow-prev">← </span><span>Models</span></a><a class="docs-next button" href="/docs/next/permissions"><span>Permissions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#database-sync">Database sync</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#general-process">General process</a></li><li><a href="#the-cli">The CLI</a></li><li><a href="#structure">Structure</a></li><li><a href="#enabling-migrations">Enabling migrations</a></li><li><a href="#creating-a-migration-autogenerate">Creating a migration (autogenerate)</a></li><li><a href="#create-a-migration-manually">Create a migration manually</a></li><li><a href="#running-migrations">Running migrations</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#example">Example</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icono-ustart.svg" alt="uStart" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/installation.html">Getting Started</a><a href="/docs/schema.html">Guides</a><a href="/docs/commands.html">API Reference</a></div><div><h5>Community</h5><a href="https://twitter.com/_uStart" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://linkedin.com/company/ustart-dev" target="_blank" rel="noreferrer noopener">LinkedIn</a><a href="https://www.facebook.com/ustart.dev/" target="_blank" rel="noreferrer noopener">Facebook</a></div><div><h5>More</h5><a href="https://github.com/ustart-dev">GitHub</a><a class="github-button" href="https://github.com/ustart-dev/ustart" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 USTART SPA</section></footer></div></body></html>
