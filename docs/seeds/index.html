@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Seeds · uStart</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Seeds allow you to populate database tables and collections with default data, sample data or test data."/><meta name="docsearch:version" content="2.0.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Seeds · uStart"/><meta property="og:type" content="website"/><meta property="og:url" content="https://ustart-dev.github.io/"/><meta property="og:description" content="Seeds allow you to populate database tables and collections with default data, sample data or test data."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-129019450-2', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/icono-ustart.svg" alt="uStart"/><h2 class="headerTitleWithLogo">uStart</h2></a><a href="/versions"><h3>2.0.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/installation" target="_self">Docs</a></li><li class=""><a href="https://github.com/ustart-dev" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/first-example-1">First Example (part 1)</a></li><li class="navListItem"><a class="navItem" href="/docs/first-example-2">First Example (part 2)</a></li><li class="navListItem"><a class="navItem" href="/docs/project-structure">Project Structure</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/schema">Schema</a></li><li class="navListItem"><a class="navItem" href="/docs/resolvers">Resolvers</a></li><li class="navListItem"><a class="navItem" href="/docs/datasources">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/models">Models</a></li><li class="navListItem"><a class="navItem" href="/docs/migrations">Migrations</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/seeds">Seeds</a></li><li class="navListItem"><a class="navItem" href="/docs/permissions">Permissions</a></li><li class="navListItem"><a class="navItem" href="/docs/subscriptions">Subscriptions</a></li><li class="navListItem"><a class="navItem" href="/docs/schema-directives">Schema Directives</a></li><li class="navListItem"><a class="navItem" href="/docs/mocking">Mocking</a></li><li class="navListItem"><a class="navItem" href="/docs/email">Email</a></li><li class="navListItem"><a class="navItem" href="/docs/testing">Testing</a></li><li class="navListItem"><a class="navItem" href="/docs/plugins">Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/build-deploy">Build &amp; Deploy</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/commands">CLI Commands</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Examples</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/3rd-party-services">3rd party services</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Seeds</h1></header><article><div><span><p>Seeds allow you to populate database tables and collections with default data, sample data or test data.</p>
+<h2><a class="anchor" aria-hidden="true" id="how-it-works"></a><a href="#how-it-works" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How it works</h2>
+<p>Seeds work for both type of models: Sequelize and MongoDB.</p>
+<p>Population is perform at boot time base on the environment variable <code>NODE_ENV</code>.</p>
+<p>If <code>NODE_ENV</code> is set to:</p>
+<ul>
+<li><strong>production</strong>: Execute <code>populateBasicData()</code> function. This mode creates the database, if not exists, before populate it.</li>
+<li><strong>development</strong>: Executes <code>populateBasicData()</code> function. This mode creates the database, if not exists, before populate it.</li>
+<li><strong>test</strong>: It executes <code>populateBasicData()</code> then <code>testingMocking()</code>. This mode forces database destruction and reconstruction before populate it.</li>
+<li><strong>dev-clean</strong>: Special model intended to help you improve your development experience. It executes <code>populateBasicData()</code> then <code>populateFakeData()</code>. This mode forces database destruction and reconstruction before populate it.</li>
+</ul>
+<blockquote>
+<p>Database sync have a direct impact on all above modes. If sync is disabled the database structure is not affected at all. More details on <a href="/docs/migrations#database-sync">Database sync</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="structure"></a><a href="#structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Structure</h2>
+<p>Seeds are stored in <code>src/data</code> folder. It consists of three scripts and one folder:</p>
+<ul>
+<li><code>basicDataMocking.js</code>: Contains <code>populateBasicData()</code> function to populate with default data.</li>
+<li><code>fakeDataMocking.js</code>: Contains <code>populateFakeData()</code> function to populate with fake data.</li>
+<li><code>testingMocking.js</code>: Contains <code>testingMocking()</code> function to populate with testing data.</li>
+<li><code>base</code>: Intended to help you organize your data sets.</li>
+</ul>
+<p>The directory tree:</p>
+<pre><code class="hljs">+-- src
+|<span class="hljs-string">   +-- data
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- base
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- basicDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- fakeDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- testingDataMocking.js
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="recommendations"></a><a href="#recommendations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Recommendations</h2>
+<p>Below there is the list of current recommendations:</p>
+<ul>
+<li>Always check if data exists before insert new ones.</li>
+<li>Be cautious about <strong>production</strong> environment.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<p>To illustrate how seeds works, lets continue with the <em>Animal</em> example shown in previous section: <a href="/docs/migrations#example">Migrations, example</a>. This time we are going to add 5 animals as default data.</p>
+<p>Before start, remember that you need a working version of <em>Animal</em> example.</p>
+<p>We are going to use the latest version of <code>animal</code> model:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// file: src/entities/Animal/animal.model.js</span>
+<span class="hljs-keyword">import</span> Sequelize <span class="hljs-keyword">from</span> <span class="hljs-string">"sequelize"</span>;
+<span class="hljs-keyword">import</span> { ustart } <span class="hljs-keyword">from</span> <span class="hljs-string">"ustart"</span>;
+
+ustart.defineModel(<span class="hljs-string">"postgres"</span>, <span class="hljs-string">"animal"</span>, {
+  <span class="hljs-attr">id</span>: {
+    <span class="hljs-attr">type</span>: Sequelize.INTEGER,
+    <span class="hljs-attr">primaryKey</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoIncrement</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">name</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">10</span>) },
+  <span class="hljs-attr">age</span>: { <span class="hljs-attr">type</span>: Sequelize.INTEGER },
+  <span class="hljs-attr">category</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">20</span>) },
+  <span class="hljs-attr">size</span>: { <span class="hljs-attr">type</span>: Sequelize.STRING(<span class="hljs-number">20</span>) }
+}, {
+  <span class="hljs-attr">timestamps</span>: <span class="hljs-literal">false</span>
+});
+</code></pre>
+<p>We need a script that holds the animals data. Let's name it <code>myAnimals.js</code>:</p>
+<pre><code class="hljs">+-- src
+|<span class="hljs-string">   +-- data
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- base
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- myAnimals.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- basicDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- fakeDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- testingDataMocking.js
+</span></code></pre>
+<p>Its content is:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> myAnimals = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">"Charlie"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">"Cat"</span>, <span class="hljs-attr">size</span>: <span class="hljs-string">"small"</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">"Milo"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">"Mouse"</span>, <span class="hljs-attr">size</span>: <span class="hljs-string">"small"</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">"Teddy"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">6</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">"Dog"</span>, <span class="hljs-attr">size</span>: <span class="hljs-string">"medium"</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">"Toby"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">9</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">"Panda"</span>, <span class="hljs-attr">size</span>: <span class="hljs-string">"large"</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">"Ruby"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">14</span>, <span class="hljs-attr">category</span>: <span class="hljs-string">"Dog"</span>, <span class="hljs-attr">size</span>: <span class="hljs-string">"medium"</span> }
+];
+</code></pre>
+<p>Now, we have to import the data and add it into <code>populateBasicData()</code> function. Open <code>basicDataMocking.js</code> script and use the follow:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> { ustart } <span class="hljs-keyword">from</span> <span class="hljs-string">"ustart"</span>;
+<span class="hljs-keyword">import</span> { myAnimals } <span class="hljs-keyword">from</span> <span class="hljs-string">"./base/myAnimals"</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">populateBasicData</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> { animal } = ustart.models;
+
+  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> animal.findAndCountAll();
+  <span class="hljs-keyword">if</span> (result.count === <span class="hljs-number">0</span>) {
+    animal.bulkCreate(myAnimals);
+  }
+};
+</code></pre>
+<p>Start your app if you had not done it already. uStart automatically insert the data in your table as follow (shell output):</p>
+<pre><code class="hljs css language-shell">[nodemon] starting `node ./node_modules/ustart-scripts/dist/scripts/ustart-entry.js`
+NODE_ENV: development
+Server is running on http://localhost:4000
+Executing (default): SELECT count(*) AS "count" FROM "animals" AS "animal";
+Executing (default): SELECT "id", "name", "age", "category", "size" FROM "animals" AS "animal";
+Executing (default): INSERT INTO "animals" ("id","name","age","category","size") VALUES (1,'Charlie',3,'Cat','small'),(2,'Milo',1,'Mouse','small'),(3,'Teddy',6,'Dog','medium'),(4,'Toby',9,'Panda','large'),(5,'Ruby',14,'Dog','medium') RETURNING *;
+</code></pre>
+<p>Now, let's query the database to see if our data is there:</p>
+<p><img src="/docs/assets/seed-show-table-data.png" alt="Query result of animals data"></p>
+<p>If your result matches the image, congratulations then, you have done your first seed flow!.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-10-7 by Leonel Peña</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/migrations"><span class="arrow-prev">← </span><span>Migrations</span></a><a class="docs-next button" href="/docs/permissions"><span>Permissions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#how-it-works">How it works</a></li><li><a href="#structure">Structure</a></li><li><a href="#recommendations">Recommendations</a></li><li><a href="#example">Example</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icono-ustart.svg" alt="uStart" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/installation.html">Getting Started</a><a href="/docs/schema.html">Guides</a><a href="/docs/commands.html">API Reference</a></div><div><h5>Community</h5><a href="https://twitter.com/_uStart" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://linkedin.com/company/ustart-dev" target="_blank" rel="noreferrer noopener">LinkedIn</a><a href="https://www.facebook.com/ustart.dev/" target="_blank" rel="noreferrer noopener">Facebook</a></div><div><h5>More</h5><a href="https://github.com/ustart-dev">GitHub</a><a class="github-button" href="https://github.com/ustart-dev/ustart" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 USTART SPA</section></footer></div></body></html>
