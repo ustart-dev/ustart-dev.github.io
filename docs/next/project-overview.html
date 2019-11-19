@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Project Overview · uStart</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="uStart is ship with a project structure, libraries and tools integrated, and name conventions to make development easier, faster and standard."/><meta name="docsearch:version" content="next"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Project Overview · uStart"/><meta property="og:type" content="website"/><meta property="og:url" content="https://ustart-dev.github.io/"/><meta property="og:description" content="uStart is ship with a project structure, libraries and tools integrated, and name conventions to make development easier, faster and standard."/><meta property="og:image" content="https://ustart-dev.github.io/img/ustart-dev-500x500-bg-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://ustart-dev.github.io/img/ustart-dev-500x500-bg-white.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-129019450-2', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/icono-ustart.svg" alt="uStart"/><h2 class="headerTitleWithLogo">uStart</h2></a><a href="/versions"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/next/installation" target="_self">Docs</a></li><li class=""><a href="https://github.com/ustart-dev" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/next/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/next/first-example-1">First Example (part 1)</a></li><li class="navListItem"><a class="navItem" href="/docs/next/first-example-2">First Example (part 2)</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/next/project-overview">Project Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/next/schema">Schema</a></li><li class="navListItem"><a class="navItem" href="/docs/next/resolvers">Resolvers</a></li><li class="navListItem"><a class="navItem" href="/docs/next/datasources">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/next/models">Models</a></li><li class="navListItem"><a class="navItem" href="/docs/next/migrations">Migrations</a></li><li class="navListItem"><a class="navItem" href="/docs/next/seeds">Seeds</a></li><li class="navListItem"><a class="navItem" href="/docs/next/permissions">Permissions</a></li><li class="navListItem"><a class="navItem" href="/docs/next/subscriptions">Subscriptions</a></li><li class="navListItem"><a class="navItem" href="/docs/next/schema-directives">Schema Directives</a></li><li class="navListItem"><a class="navItem" href="/docs/next/mocking">Mocking</a></li><li class="navListItem"><a class="navItem" href="/docs/next/email">Email</a></li><li class="navListItem"><a class="navItem" href="/docs/next/testing">Testing</a></li><li class="navListItem"><a class="navItem" href="/docs/next/plugins">Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/next/build-deploy">Build &amp; Deploy</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/next/commands">CLI Commands</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Examples</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/next/3rd-party-services">3rd party services</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Project Overview</h1></header><article><div><span><p>uStart is ship with a project structure, libraries and tools integrated, and name conventions to make development easier, faster and standard.</p>
+<p>After you have initialize a project with <code>npx ustart-cli init</code>, you are going to have several parts configured for you.</p>
+<h2><a class="anchor" aria-hidden="true" id="project-structure"></a><a href="#project-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Project Structure</h2>
+<p>After you have initialized a project with <code>npx ustart-cli init</code>, it will create a directory structure with the follow:</p>
+<pre><code class="hljs">+-- __tests__/
+|<span class="hljs-string">   +-- hello.test.js
+</span>|<span class="hljs-string">   +-- utils.js
+</span>|
++-- config/
+|<span class="hljs-string">   +-- datasources.js
+</span>|<span class="hljs-string">   +-- jestSetup.js
+</span>|<span class="hljs-string">   +-- yoga.js
+</span>|
++-- src/
+|<span class="hljs-string">   +-- data/
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- base/
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- basicDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- fakeDataMocking.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- testingMocking.js
+</span>|<span class="hljs-string">   </span>|
+|<span class="hljs-string">   +-- directives/
+</span>|<span class="hljs-string">   +-- entities/
+</span>|<span class="hljs-string">   +-- helpers/
+</span>|<span class="hljs-string">   +-- middlewares/
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- express.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- graphql.js
+</span>|<span class="hljs-string">   </span>|
+|<span class="hljs-string">   +-- models/
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +--associations.js
+</span>|<span class="hljs-string">   </span>|
+|<span class="hljs-string">   +-- plugins/
+</span>|<span class="hljs-string">   +-- shield/
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- options.js
+</span>|<span class="hljs-string">   </span>|<span class="hljs-string">   +-- rules.js
+</span>|<span class="hljs-string">   </span>|
+|<span class="hljs-string">   +-- subscription/
+</span>|
++-- .babelrc
++-- .dockerignore
++-- .env
++-- .eslintignore
++-- .gitignore
++-- .prettierignore
++-- docker-compose.builder.yml
++-- docker-compose.yml
++-- Dockerfile
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="directory-and-files-description"></a><a href="#directory-and-files-description" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Directory and Files Description</h2>
+<ul>
+<li><strong><strong>tests</strong></strong>: Place your tests here. <code>hello.test.js</code> contains an example using Jest.</li>
+<li><strong>config</strong>: Contains configuration files for <a href="/docs/next/datasources">datasources</a>, <a href="https://jestjs.io/docs/en/22.x/getting-started.html">Jest</a> and <a href="https://github.com/prisma/graphql-yoga#startoptions-options-callback-options-options--void----null-promisevoid">graphql-yoga options</a></li>
+<li><strong>src/data</strong>: Contains the database seeds for different environments. It also defines the endpoints for connecting datasources. Use the scripts <code>basicDataMocking</code>, <code>fakeDataMocking</code> and <code>testingMocking</code> with cautious, they are temporary solution while we implement the uStart datamodel generator and we are not sure if they will be kept on next releases.</li>
+<li><strong>src/directives</strong>: Schema directives.</li>
+<li><strong>src/entities</strong>: Contains the graphql schemas (types), resolvers, database models, permissions and mocking.</li>
+<li><strong>src/middlewares</strong>: Contains the middlewares to be loaded by uStart. <code>express.js</code> defines the express middlewares to be passed to <code>graphql-yoga</code> server (by default includes cors y compression). <code>graphql.js</code> defines the resolver middlewares, it uses <code>graphql-middleware</code> package.</li>
+<li><strong>src/models</strong>: <code>associations.js</code> establishes the Sequelize associations.</li>
+<li><strong>src/plugins</strong>: Plugins folder.</li>
+<li><strong>src/shield</strong>: <code>options.js</code> defines the <code>graphql-shield</code> options. Use <code>rules.js</code> to implement your shield rules.</li>
+<li><strong>src/subscription</strong>: Contains the subscription instance.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="env"></a><a href="#env" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>.env</h2>
+<p>Use it to define your own environment variables. It is also used by uStart, the framework options are:</p>
+<ul>
+<li><strong>NODE_ENV</strong>: <code>development</code>, <code>test</code>, <code>dev-clean</code> and <code>production</code>.</li>
+<li><strong>GRAPHQL_ENDPOINT_PORT</strong>: Port to listen. default <code>4000</code>.</li>
+<li><strong>FAST_MOCKING</strong>: By default it value is <code>false</code>. When is set to <code>true</code>, uStart will respond with the mocking files located in every entity instead of using the resolver script. Use it for fast prototype.</li>
+<li><strong>PG_URI</strong>: URI to PostgreSQL. This name is not mandatory, you can change it for another one.</li>
+<li><strong>MYSQL_URI</strong>: URI to MySQL. This name is not mandatory, you can change it for another one.</li>
+<li><strong>MONGO_URI</strong>: URI to MongoDB. This name is not mandatory, you can change it for another one.</li>
+<li><strong>MAIL_URL</strong>: It should reference an SMTP server and use the form <code>smtp://USERNAME:PASSWORD@HOST:PORT</code> or <code>smtps://USERNAME:PASSWORD@HOST:PORT</code>. See <a href="/docs/next/email">Email</a> section.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="libraries-and-tools"></a><a href="#libraries-and-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Libraries and tools</h2>
+<p>Several JS libraries and tools are already part of uStart. If you look at <code>dependencies</code> and <code>devDependencies</code> of the generated <code>package.json</code> you will find the follow:</p>
+<p><strong>dependencies</strong></p>
+<ul>
+<li>ustart: uStart core package</li>
+<li>ustart-cli: uStart CLI</li>
+<li>ustart-scripts: Scripts and project templates used at init fase.</li>
+</ul>
+<p><strong>devDependencies</strong></p>
+<ul>
+<li>babel-cli</li>
+<li>babel-preset-env</li>
+<li>babel-preset-stage-3</li>
+<li>concurrently</li>
+<li>graphql-request</li>
+<li>husky</li>
+<li>jest</li>
+<li>lint-staged</li>
+<li>nodemon</li>
+<li>prettier-standard</li>
+</ul>
+<p>And if you choose to, these packages will also be added as <em>dependencies</em> in the <code>init</code> command:</p>
+<ul>
+<li>@ustart/sequelize-auto-migrations</li>
+<li>graphql-shield</li>
+<li>mongoose</li>
+<li>sequelize</li>
+<li>sequelize-cli</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="scripts"></a><a href="#scripts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scripts</h2>
+<p>The <code>package.json</code> contains a set of scripts intended to help you develop, build, test, format, among other things, your project:</p>
+<ul>
+<li><code>clean</code>: Cleans the <code>dist</code> folder at the root of your project.</li>
+<li><code>build</code>: Build the project for production.</li>
+<li><code>build:dev</code>: Build the project for development.</li>
+<li><code>start</code>: Start the app for development.</li>
+<li><code>serve</code>: Serves the app for production.</li>
+<li><code>test</code>: Test your project using <em>Jest</em>.</li>
+<li><code>format</code>: Format the code to ensure readability and code quality using <a href="https://github.com/sheerun/prettier-standard">prettier-standard</a> package.</li>
+</ul>
+<p>Two entries are also included but they <strong>should not</strong> be executed directly:</p>
+<ul>
+<li><code>watch-src</code>: Start babel to watch the <em>src</em> folder.</li>
+<li><code>watch-node</code>: Start nodemon to watch the <em>dist</em> folder.</li>
+</ul>
+<p>Both of them are used as part of <em>start</em> command: <code>npm start</code>.</p>
+<p>More information about the build process on <a href="/docs/next/build-deploy">Build &amp; Deploy</a> section.</p>
+<h2><a class="anchor" aria-hidden="true" id="code-quality"></a><a href="#code-quality" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code quality</h2>
+<p>To ensure code quality, your project is already configured to provide <strong>linting</strong> and <strong>formatting</strong> using the packages <a href="https://www.npmjs.com/package/husky">husky</a>, <a href="https://www.npmjs.com/package/lint-staged">lint-staged</a> and <a href="https://github.com/sheerun/prettier-standard">prettier-standard</a>.</p>
+<p>To format your code base just run the script <code>npm run format</code>. To ensure you don't forget run it, we have added a hook that is executed before git commit, see &quot;husky&quot; entry at your <code>package.json</code>.</p>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 11/14/2019 by Leonel Peña</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/next/first-example-2"><span class="arrow-prev">← </span><span>First Example (part 2)</span></a><a class="docs-next button" href="/docs/next/schema"><span>Schema</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#project-structure">Project Structure</a></li><li><a href="#directory-and-files-description">Directory and Files Description</a></li><li><a href="#env">.env</a></li><li><a href="#libraries-and-tools">Libraries and tools</a></li><li><a href="#scripts">Scripts</a></li><li><a href="#code-quality">Code quality</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/icono-ustart.svg" alt="uStart" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/installation.html">Getting Started</a><a href="/docs/schema.html">Guides</a><a href="/docs/commands.html">API Reference</a></div><div><h5>Community</h5><a href="https://twitter.com/_uStart" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://linkedin.com/company/ustart-dev" target="_blank" rel="noreferrer noopener">LinkedIn</a><a href="https://www.facebook.com/ustart.dev/" target="_blank" rel="noreferrer noopener">Facebook</a></div><div><h5>More</h5><a href="https://github.com/ustart-dev">GitHub</a><a class="github-button" href="https://github.com/ustart-dev/ustart" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 USTART SPA. Landing images by <a href="https://undraw.co/">unDraw</a>.</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '18e736bc88a7fcb9ff490ed829bdcd07',
+                indexName: 'ustart',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
